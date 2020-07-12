@@ -122,7 +122,7 @@ class SVRGCD6D7FileNodeMigration extends SVRGCD6D7NodeMigration
     // Map files from D6 core upload field to File Field.
     // See https://www.drupal.org/node/1819704#comment-8874705
     $this->addFieldMapping('field_file_file', 'field_file_file')
-      ->sourceMigration('File');
+      ->sourceMigration('MemberFiles');
     $this->addFieldMapping('field_file_file:file_class')
       ->defaultValue('MigrateFileFid');
     $this->addFieldMapping('field_file_file:preserve_files')
@@ -175,7 +175,7 @@ class SVRGCD6D7PageNodeMigration extends SVRGCD6D7NodeMigration {
     // Map files from D6 core upload field to File Field.
     // See https://www.drupal.org/node/1819704#comment-8874705
     $this->addFieldMapping('field_s_page_file', 'upload')
-      ->sourceMigration('File');
+      ->sourceMigration('PublicFiles');
     $this->addFieldMapping('field_s_page_file:file_class')
       ->defaultValue('MigrateFileFid');
     $this->addFieldMapping('field_s_page_file:preserve_files')
@@ -201,6 +201,7 @@ class SVRGCD6D7PhotoNodeMigration extends SVRGCD6D7NodeMigration {
     parent::__construct($arguments);
 
     // @TODO: See if this works. It's a Field Collection, so might need to do some additional work.
+    // https://www.drupal.org/project/migrate_d2d/issues/2277355.
     $this->addFieldMapping('field_s_image_info', 'field_photo_photo');
 
 

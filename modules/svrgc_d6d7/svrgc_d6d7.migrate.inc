@@ -41,15 +41,34 @@ function svrgc_d6d7_migrate_api() {
 
   // Register the file migration.
   // source_dir needs to be adjusted to match your file system.
-  $api['migrations']['File'] = $common_arguments + array(
-    'machine_name' => 'filemigration',
+  $api['migrations']['PublicFiles'] = $common_arguments + array(
+    'machine_name' => 'publicfilemigration',
     'description' => t('Import Drupal 6 files'),
     'class_name' => 'DrupalFile6Migration',
     'user_migration' => 'User',
     'default_uid' => 1,
     'source_dir' => DRUPAL_ROOT . '/../../srgcdrupal',
-    // @TODO: private_upload files.
     'destination_dir' => 'public://',
+  );
+
+  $api['migrations']['PrivateFiles'] = $common_arguments + array(
+    'machine_name' => 'privatefilemigration',
+    'description' => t('Import Drupal 6 files'),
+    'class_name' => 'DrupalFile6Migration',
+    'user_migration' => 'User',
+    'default_uid' => 1,
+    'source_dir' => DRUPAL_ROOT . '/../../srgcdrupal/files/private',
+    'destination_dir' => 'private://',
+  );
+
+  $api['migrations']['MemberFiles'] = $common_arguments + array(
+    'machine_name' => 'memberfilemigration',
+    'description' => t('Import Drupal 6 files'),
+    'class_name' => 'DrupalFile6Migration',
+    'user_migration' => 'User',
+    'default_uid' => 1,
+    'source_dir' => DRUPAL_ROOT . '/../../srgcdrupal/files/members',
+    'destination_dir' => 'private://',
   );
 
   // Register the user migration.
@@ -159,6 +178,8 @@ function svrgc_d6d7_migrate_api() {
       'description' => t('Migration of File nodes from Drupal 6'),
       'source_type' => 'file',
       'destination_type' => 'file',
+      'file_migration' => 'MemberFiles',
+      'soft_dependencies' => array('MemberFiles'),
     ),
     'OperatingHoursNodes' => array(
       'class_name' => 'SVRGCD6D7OperatingHoursNodeMigration',
@@ -171,6 +192,8 @@ function svrgc_d6d7_migrate_api() {
       'description' => t('Migration of Page nodes from Drupal 6'),
       'source_type' => 'page',
       'destination_type' => 'stanford_page',
+      'file_migration' => 'PublicFiles',
+      'soft_dependencies' => array('PublicFiles'),
     ),
     'PhotoNodes' => array(
       'class_name' => 'SVRGCD6D7PhotoNodeMigration',
@@ -191,8 +214,6 @@ function svrgc_d6d7_migrate_api() {
   // set up the dependency and resolve D6->D7 uids.
   $common_node_arguments = $common_arguments + array(
     'user_migration' => 'User',
-    'file_migration' => 'File',
-    'soft_dependencies' => array('File'),
   );
 
   foreach ($node_arguments as $migration_name => $arguments) {
