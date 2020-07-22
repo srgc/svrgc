@@ -53,13 +53,12 @@ function svrgc_d6d7_migrate_api() {
   );
 
   // Register the user migration.
-  // We just use the migrate_d2d D6 migration class as-is.
   $api['migrations']['User'] = $common_arguments + array(
     'description' => t('Migration of Users from Drupal 6'),
-    'class_name' => 'DrupalUser6Migration',
+    'class_name' => 'svrgcd6d7UserMigration',
     'role_migration' => 'Roles',
     'picture_migration' => 'UserPictures',
-    'soft_dependencies' => array('Roles'),
+    'soft_dependencies' => array('Roles','UserPictures'),
   );
 
   // Register the role migration.
@@ -199,6 +198,14 @@ function svrgc_d6d7_migrate_api() {
     $arguments = array_merge_recursive($arguments, $common_node_arguments);
     $api['migrations'][$migration_name] = $arguments;
   }
+
+  // Register the Field Collection migration.
+  $api['migrations']['FieldCollection'] = $common_arguments + array(
+      'description' => t('Migration of Field Collections from Drupal 6'),
+      'class_name' => 'SVRGCD6D7FieldCollectionMigration',
+      'dependencies' => array('PhotoNodes'),
+
+    );
 
   // Menu migrations -- same requirements as users
   /**
