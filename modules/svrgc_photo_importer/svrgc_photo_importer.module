@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the SRGC Photo Importer feature.
+ */
+
+include_once 'svrgc_photo_importer.features.inc';
