@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @file
+ * Code for the SRGC Contact Categories feature.
+ */
+
+include_once 'svrgc_contact_categories.features.inc';
 /**
  * @file
  * Drupal needs this blank file.
