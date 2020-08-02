@@ -3,3 +3,22 @@
  * @file
  * Drupal needs this blank file.
  */
+
+function svrgc_form_alter(&$form, &$form_state, $form_id) {
+//dpm($form_id);
+//dpm($form['cid']);
+   if (($form_id == "contact_site_form") && arg(1) ){
+// dpm($form['cid']);
+     if (is_numeric(arg(1))) {   
+           if (isset($form['cid'])) {
+             $catarray = $form['cid'];    
+             $options = $catarray['#options'];
+             if (isset($options[arg(1)])) {
+                 $form['cid']['#default_value'] = arg(1);
+                 }   
+           }   
+         }   
+    }   
+  
+}
+
