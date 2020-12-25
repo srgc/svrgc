@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function svrgc_contact_categories_install() {
+
+  // Truncate the `contact` DB table so that we get the correct cid values for our categories.
+  $result = db_truncate('contact')->execute();
+}

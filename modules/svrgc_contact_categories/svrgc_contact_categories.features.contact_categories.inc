@@ -10,12 +10,12 @@
  */
 function svrgc_contact_categories_contact_categories_defaults() {
   return array(
-    'General Questions' => array(
-      'category' => 'General Questions',
+    'Website Questions' => array(
+      'category' => 'Website Questions',
       'recipients' => 'webmaster@sunnyvalegunclub.com',
       'reply' => '',
       'weight' => -10,
-      'selected' => 1,
+      'selected' => 0,
     ),
     'Membership' => array(
       'category' => 'Membership',
@@ -24,12 +24,12 @@ function svrgc_contact_categories_contact_categories_defaults() {
       'weight' => 0,
       'selected' => 0,
     ),
-    'Website Questions' => array(
-      'category' => 'Website Questions',
+    'General Questions' => array(
+      'category' => 'General Questions',
       'recipients' => 'webmaster@sunnyvalegunclub.com',
       'reply' => '',
       'weight' => 10,
-      'selected' => 0,
+      'selected' => 1,
     ),
   );
 }

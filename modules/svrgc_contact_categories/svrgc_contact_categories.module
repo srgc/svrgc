@@ -13,6 +13,6 @@ function svrgc_contact_categories_form_alter(&$form, &$form_state, $form_id) {
     $options = $catarray['#options'];
     if (isset($options[arg(1)])) {
       $form['cid']['#default_value'] = arg(1);
-    }   
-  }   
+    }
+  }
 }
