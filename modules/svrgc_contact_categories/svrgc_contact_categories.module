@@ -1,5 +1,18 @@
 <?php
+
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the SRGC Contact Categories feature.
  */
+
+include_once 'svrgc_contact_categories.features.inc';
+
+function svrgc_contact_categories_form_alter(&$form, &$form_state, $form_id) {
+  if (($form_id == "contact_site_form") && arg(1) && is_numeric(arg(1)) && isset($form['cid'])){
+    $catarray = $form['cid'];
+    $options = $catarray['#options'];
+    if (isset($options[arg(1)])) {
+      $form['cid']['#default_value'] = arg(1);
+    }
+  }
+}
